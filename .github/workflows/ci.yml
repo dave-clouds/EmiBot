@@ -18,6 +18,12 @@ jobs:
     name: Validate EmiBot
     runs-on: ubuntu-latest
 
+    env:
+      DISCORD_TOKEN: ci-test-token
+      DISCORD_CLIENT_ID: '000000000000000000'
+      DISCORD_GUILD_ID: '000000000000000000'
+      NODE_ENV: test
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
