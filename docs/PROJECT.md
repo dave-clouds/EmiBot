@@ -196,3 +196,4 @@ The preferred workflow is:
 
 ```bash
 npm run check
+```
