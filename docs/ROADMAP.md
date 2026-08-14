@@ -100,7 +100,7 @@ These remain future work.
 
 Milestone 2 — Slash Commands and Command Foundation
 
-Status: active
+**Status: COMPLETE**
 
 Objective
 
@@ -132,7 +132,7 @@ Milestone 2 should only be implemented after explicit approval to begin the mile
 
 Milestone 3 — Message Handling and Application Routing
 
-Status: FUTURE
+Status: active
 
 Objective
 
