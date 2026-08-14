@@ -717,3 +717,4 @@ over:
 large → speculative → tightly coupled → difficult to review
 
 The long-term goal is a capable EmiAgent, but the immediate responsibility is to build a reliable foundation one milestone at a time.
+```

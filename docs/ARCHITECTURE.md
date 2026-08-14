@@ -638,3 +638,4 @@ docs/REPLIT_AGENT.md — instructions for the Replit Agent.
 
 
 When documentation conflicts with the actual implementation, the discrepancy should be identified and resolved rather than silently assuming one is correct.
+```
