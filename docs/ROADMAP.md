@@ -100,7 +100,7 @@ These remain future work.
 
 Milestone 2 — Slash Commands and Command Foundation
 
-Status: FUTURE
+Status: active
 
 Objective
 
