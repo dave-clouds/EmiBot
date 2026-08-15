@@ -1,6 +1,6 @@
-# EmiBot — Replit Agent Instructions
+EmiBot — Replit Agent Instructions
 
-## Purpose
+Purpose
 
 You are the primary coding agent for the EmiBot repository when the project is opened and developed in Replit.
 
@@ -8,22 +8,24 @@ Your responsibility is to help maintain and develop EmiBot according to the proj
 
 You are an implementation agent, not the project owner.
 
-Do not independently expand the project's scope or implement future functionality without explicit approval.
+Do not independently expand the project's scope or implement future functionality without explicit approval from the human maintainer.
 
 ---
 
-# First Action: Understand the Repository
+First Action: Understand the Repository
 
 Before making any code changes:
 
-1. Read `README.md`.
-2. Read `docs/PROJECT.md`.
-3. Read `docs/ARCHITECTURE.md`.
-4. Read `docs/ROADMAP.md`.
-5. Read this file: `docs/REPLIT_AGENT.md`.
-6. Inspect the existing source code and tests.
-7. Determine which roadmap milestone is currently active.
-8. Determine what functionality is actually implemented.
+1. Read "README.md".
+2. Read "docs/PROJECT.md".
+3. Read "docs/ARCHITECTURE.md".
+4. Read "docs/ROADMAP.md".
+5. Read "docs/REPLIT_AGENT.md".
+6. Inspect the existing source code.
+7. Inspect the existing tests.
+8. Determine which roadmap milestone is currently active.
+9. Determine what functionality is actually implemented.
+10. Confirm the current Git branch.
 
 Do not assume that the roadmap describes functionality that already exists.
 
@@ -31,25 +33,27 @@ The actual source code and tests must be considered when determining the current
 
 ---
 
-# Repository Import and Replit Environment
+Repository Import and Replit Environment
 
-When the GitHub repository is imported into Replit, treat the repository's current default/main branch as the starting project state.
+When the GitHub repository is imported into Replit, treat the repository's current default branch as the starting project state.
 
-The Replit environment may create its own local Git branch for development.
+The project may be imported from a milestone branch when the human maintainer intentionally configures that branch as the repository default for agent-assisted development.
 
-Do not assume that a Replit-created local branch changes the project's GitHub branch structure.
+For Milestone 4, the expected working branch is:
+
+M4
 
 Before making changes, run:
 
-```bash
 git status
 git branch
 git remote -v
 
 Confirm which branch is currently checked out.
 
-Do not force-push, delete branches, change remotes, or rewrite Git history unless explicitly instructed by a human maintainer.
+If the expected milestone branch is not checked out, do not make code changes until the branch situation is understood.
 
+Do not force-push, delete branches, change remotes, rewrite Git history, or change repository default-branch settings unless explicitly instructed by the human maintainer.
 
 ---
 
@@ -57,37 +61,20 @@ Project Authority
 
 The following documents have different responsibilities:
 
-README.md — project entry point and navigation.
-
-docs/PROJECT.md — project goals, scope, principles, and security.
-
-docs/ARCHITECTURE.md — technical architecture and design direction.
-
-docs/ROADMAP.md — milestones, requirements, and completion criteria.
-
-docs/REPLIT_AGENT.md — instructions for the Replit Agent.
-
-.github/copilot-instructions.md — guidance for GitHub Copilot when reviewing or analyzing the repository.
-
+- "README.md" — project entry point and navigation.
+- "docs/PROJECT.md" — project goals, scope, principles, and security.
+- "docs/ARCHITECTURE.md" — technical architecture and design direction.
+- "docs/ROADMAP.md" — milestones, requirements, and completion criteria.
+- "docs/REPLIT_AGENT.md" — instructions for the Replit Agent.
+- ".github/copilot-instructions.md" — guidance for GitHub Copilot when reviewing or analyzing the repository.
 
 When documents conflict with the actual implementation:
 
 1. Do not silently choose one.
-
-
 2. Identify the discrepancy.
-
-
 3. Determine whether the code or documentation is outdated.
-
-
 4. Report the discrepancy to the human maintainer.
-
-
 5. Do not make broad architectural changes merely to resolve documentation differences.
-
-
-
 
 ---
 
@@ -100,93 +87,368 @@ Only implement functionality required by the active milestone.
 Do not implement future milestones simply because they are described in:
 
 docs/ROADMAP.md
-
 docs/ARCHITECTURE.md
-
+docs/PROJECT.md
 README.md
-
-
-For example, the presence of planned Zora, wallet, AI, or trading architecture does not authorize implementation of those features.
 
 Future architecture is guidance for direction, not permission to implement everything immediately.
 
-If the requested task appears to belong to a future milestone, stop and ask the human maintainer for confirmation.
+If the requested task appears to belong to a future milestone:
 
+1. Stop.
+2. Explain why it appears outside the current milestone.
+3. Ask the human maintainer for confirmation.
 
 ---
 
 Current Project State
 
-The current completed milestone is:
+Milestones 1–3 are complete.
 
-Milestone 1 — Discord Bot Foundation
+The current active milestone is:
 
-Milestone 1 is complete.
+Milestone 4 — EmiAgent Foundation
 
-The next planned milestone is:
+The current implementation already includes:
 
-Milestone 2 — Slash Commands and Command Foundation
+- Discord Gateway connectivity.
+- Discord message handling.
+- Discord direct-message handling.
+- Slash-command handling.
+- Dedicated message handler.
+- Dedicated command handler.
+- Environment-based configuration.
+- Structured logging.
+- Error handling.
+- Graceful shutdown.
+- Automated tests.
+- ESLint validation.
+- Prettier validation.
 
-Milestone 2 is currently future work unless the human maintainer explicitly instructs you to begin it.
+Milestone 4 introduces the foundation for EmiAgent.
 
-The current EmiBot implementation is intentionally small.
-
-
----
-
-Current Functionality
-
-The current application:
-
-Connects to Discord through discord.js.
-
-Uses the Discord Gateway.
-
-Responds when EmiBot is mentioned.
-
-Ignores messages sent by bots.
-
-Uses environment-based configuration.
-
-Validates DISCORD_TOKEN.
-
-Uses Pino for structured logging.
-
-Handles Discord client errors.
-
-Handles graceful shutdown.
-
-Uses Vitest for automated tests.
-
-Uses ESLint.
-
-Uses Prettier.
-
-
-Do not assume that future components already exist.
-
+The M4 implementation must remain deliberately small and controlled.
 
 ---
 
-Current Project Structure
+M4 Objective
 
-The current implementation includes:
+The objective of M4 is to establish a clean application-level assistant boundary.
+
+The initial assistant implementation must be deterministic or mock-based.
+
+M4 should establish:
+
+Discord
+   ↓
+Message / Command Handler
+   ↓
+Normalized Application Request
+   ↓
+EmiAgent Interface
+   ↓
+Mock / Deterministic Assistant
+   ↓
+Structured Assistant Response
+   ↓
+Application / Handler
+   ↓
+Discord
+
+The purpose is to prove that the application can communicate with an assistant component without coupling the assistant directly to Discord.
+
+---
+
+M4 Scope
+
+M4 may introduce:
+
+- An assistant/application module.
+- A small assistant interface.
+- Normalized application requests.
+- Structured assistant responses.
+- Deterministic or mock assistant behavior.
+- Validation of assistant requests.
+- Assistant error handling.
+- Tests for the assistant boundary.
+- Tests for handler-to-assistant integration where required.
+- Minimal application routing required to support the assistant boundary.
+
+M4 should not introduce unnecessary infrastructure or abstractions.
+
+Only create components that are justified by the actual M4 requirements.
+
+---
+
+M4 Explicitly Out of Scope
+
+Do not implement the following during M4 unless the human maintainer explicitly changes the milestone scope:
+
+- OpenAI integration.
+- Anthropic integration.
+- Gemini integration.
+- Any other real LLM provider.
+- Real AI model calls.
+- Prompt-management infrastructure.
+- Autonomous agent loops.
+- Zora integration.
+- Blockchain integration.
+- Wallet integration.
+- Private-key handling.
+- Seed phrases.
+- Transaction signing.
+- Token trading.
+- Automated financial actions.
+- Image-generation APIs.
+- Persistent databases.
+- Redis.
+- PostgreSQL.
+- Production infrastructure.
+- Unrestricted network tools.
+- Unrestricted filesystem tools.
+- MCP integrations unless explicitly approved.
+- Autonomous external actions.
+
+The presence of these technologies in project documentation does not authorize their implementation.
+
+---
+
+M4 Assistant Rules
+
+The assistant must be implemented behind a clearly defined interface.
+
+The assistant should receive application-level data rather than raw Discord objects.
+
+Avoid passing objects such as:
+
+Discord Message
+Discord Interaction
+Discord Client
+Discord Channel
+
+directly into the assistant unless there is a specific architectural reason approved by the human maintainer.
+
+Prefer a normalized application request.
+
+Conceptually:
+
+Discord Input
+     ↓
+Handler
+     ↓
+Application Request
+     ↓
+Assistant
+
+The assistant should return a predictable structured response.
+
+Conceptually:
+
+Assistant
+     ↓
+Assistant Response
+     ↓
+Application / Handler
+     ↓
+Discord
+
+The exact interface should remain minimal.
+
+Do not create an elaborate framework for hypothetical future functionality.
+
+---
+
+Deterministic / Mock Assistant
+
+The M4 assistant must be deterministic or mock-based.
+
+Its behavior should be predictable and testable.
+
+The assistant should be capable of demonstrating:
+
+- Valid request handling.
+- Invalid request handling.
+- Predictable responses.
+- Controlled failures.
+- Structured response output.
+
+The mock assistant is not intended to simulate real intelligence.
+
+Its purpose is to prove the architecture before introducing an actual AI provider.
+
+---
+
+Future AI Provider Boundary
+
+A future real AI provider must be replaceable behind the assistant interface.
+
+The Discord layer must not need to know:
+
+- Which AI provider is used.
+- Which model is selected.
+- How prompts are constructed.
+- How provider authentication works.
+- How provider-specific responses are parsed.
+
+Do not add provider-specific abstractions during M4 unless required to establish the interface.
+
+---
+
+Security Rules
+
+Security is a hard requirement.
+
+Never create, commit, or expose:
+
+- Discord bot tokens.
+- API keys.
+- Private keys.
+- Seed phrases.
+- Wallet credentials.
+- Passwords.
+- Authentication tokens.
+- Production credentials.
+- Real ".env" files containing secrets.
+
+Never place secrets in:
+
+- Source code.
+- Tests.
+- Documentation.
+- Logs.
+- Screenshots.
+- Commit messages.
+- Pull requests.
+
+Use Replit's Secrets/environment-variable system for sensitive values.
+
+If a requested task requires a secret that has not been provided through an appropriate secure mechanism:
+
+1. Stop.
+2. Explain why the secret is required.
+3. Ask the human maintainer to configure it securely.
+
+Never ask the human maintainer to paste secrets into source files.
+
+---
+
+EmiAgent Security Boundary
+
+During M4, EmiAgent must not have access to:
+
+- Private keys.
+- Seed phrases.
+- Wallet credentials.
+- Discord tokens.
+- API keys.
+- Passwords.
+- Unrestricted filesystem operations.
+- Unrestricted network operations.
+- Unrestricted external tools.
+
+The assistant must not independently:
+
+- Sign transactions.
+- Transfer funds.
+- Buy assets.
+- Sell assets.
+- Mint blockchain content.
+- Publish external content.
+- Execute financial actions.
+- Modify repository secrets.
+- Modify GitHub security settings.
+- Modify protected branch settings.
+
+Future tools require explicit interfaces and permission boundaries.
+
+---
+
+Discord Rules
+
+When working with Discord functionality:
+
+- Use the existing "discord.js" setup unless M4 explicitly requires a change.
+- Request only the Gateway intents required by the feature.
+- Do not enable privileged intents unnecessarily.
+- Never expose Discord tokens.
+- Handle Discord errors explicitly.
+- Avoid blocking the Discord event loop.
+- Use asynchronous operations appropriately.
+- Preserve graceful shutdown behavior.
+
+Do not move assistant logic back into "src/index.js".
+
+Do not place LLM-provider logic inside Discord handlers.
+
+---
+
+Architecture Rules
+
+Follow:
+
+docs/ARCHITECTURE.md
+
+The preferred dependency direction is:
+
+Discord
+   ↓
+Handlers
+   ↓
+Application
+   ↓
+EmiAgent
+   ↓
+Approved Tools / Integrations
+
+Do not create unnecessary architectural layers.
+
+When introducing a new component, define:
+
+- Its responsibility.
+- Its dependencies.
+- Its public interface.
+- Its error behavior.
+- Its tests.
+- Its security boundary where applicable.
+
+Avoid circular dependencies.
+
+Prefer simple, one-directional dependencies.
+
+---
+
+Existing Project Structure
+
+The repository currently contains the established Discord foundation and M3 handler separation.
+
+Relevant structure includes:
 
 src/
 ├── config/
 │   └── env.js
+├── commands/
+│   └── ping.js
+├── discord/
+│   └── register-commands.js
+├── handlers/
+│   ├── command-handler.js
+│   └── message-handler.js
 ├── lib/
 │   └── logger.js
 └── index.js
 
 tests/
+├── commands/
+│   └── ping.test.js
+├── handlers/
+│   ├── command-handler.test.js
+│   └── message-handler.test.js
 ├── config.test.js
 └── logger.test.js
 
-Future modules should only be introduced when justified by an active requirement.
+Before creating new files, inspect the existing structure.
 
-Avoid creating empty architecture layers simply because they are mentioned in the target architecture.
-
+Do not duplicate functionality that already exists.
 
 ---
 
@@ -198,47 +460,48 @@ Step 1 — Understand
 
 Read the relevant documentation and inspect the existing implementation.
 
-Step 2 — Plan
+Step 2 — Confirm Scope
 
 Determine:
 
-What needs to change.
+- What needs to change.
+- Why it needs to change.
+- Which files are affected.
+- Which milestone the change belongs to.
+- Whether the change introduces a new architectural component.
 
-Why it needs to change.
+If the change is outside M4, stop and ask.
 
-Which files are affected.
+Step 3 — Plan
 
-Which milestone the change belongs to.
+For non-trivial changes, provide a concise implementation plan before making broad modifications.
 
-What tests are required.
+The plan should identify:
 
+- Files to create or modify.
+- Main implementation change.
+- Tests required.
+- Any architectural implications.
 
-For non-trivial changes, explain the plan before making broad modifications.
-
-Step 3 — Implement
+Step 4 — Implement
 
 Make the smallest reasonable change that satisfies the requirement.
 
 Prefer:
 
-Small modules.
-
-Clear responsibilities.
-
-Existing project conventions.
-
-Simple solutions.
-
-Explicit dependencies.
-
+- Small modules.
+- Clear responsibilities.
+- Existing project conventions.
+- Explicit dependencies.
+- Simple interfaces.
 
 Avoid unnecessary abstractions.
 
-Step 4 — Test
+Step 5 — Test
 
-Run the relevant tests.
+Run relevant tests.
 
-For normal code changes, run:
+For normal code changes:
 
 npm run check
 
@@ -252,24 +515,19 @@ Vitest
 
 Do not consider the implementation complete if these checks fail unless the failure is understood and explicitly reported.
 
-Step 5 — Manual Validation
+Step 6 — Manual Validation
 
-When automated tests cannot verify the complete behavior, document and perform the appropriate manual test.
+When automated tests cannot verify complete behavior, perform the appropriate manual validation.
 
-For Discord functionality, this may include:
+For Discord behavior this may include:
 
-Starting EmiBot.
+1. Starting EmiBot.
+2. Confirming successful Discord connection.
+3. Sending the relevant Discord message or command.
+4. Confirming the expected response.
+5. Confirming error behavior where applicable.
 
-Confirming successful Discord connection.
-
-Sending the relevant Discord message or command.
-
-Confirming the expected response.
-
-Confirming error behavior where applicable.
-
-
-Step 6 — Review
+Step 7 — Review
 
 Before finishing:
 
@@ -278,74 +536,39 @@ git diff
 
 Check for:
 
-Unintended changes.
-
-Debugging code.
-
-Secrets.
-
-Temporary files.
-
-Unrelated modifications.
-
-Incorrect documentation.
-
-Broken tests.
-
-
+- Unintended changes.
+- Debugging code.
+- Secrets.
+- Temporary files.
+- Unrelated modifications.
+- Incorrect documentation.
+- Broken tests.
+- Unnecessary dependencies.
 
 ---
 
-Security Rules
+Testing Requirements
 
-Security is a hard requirement.
+New behavior should have appropriate tests where practical.
 
-Never create, commit, or expose:
+For M4, tests should cover the assistant boundary.
 
-Discord bot tokens.
+Where appropriate, test:
 
-API keys.
+- Valid requests.
+- Invalid requests.
+- Deterministic assistant responses.
+- Structured response shape.
+- Assistant errors.
+- Handler-to-assistant interaction.
+- Application routing.
+- Rejection or exclusion of sensitive inputs.
 
-Private keys.
+The assistant should be testable without connecting to Discord or an external AI provider.
 
-Seed phrases.
+Do not delete or weaken existing tests simply to make a change pass.
 
-Wallet credentials.
-
-Passwords.
-
-Authentication tokens.
-
-Production credentials.
-
-Real .env files containing secrets.
-
-
-Never place secrets in:
-
-Source code.
-
-Tests.
-
-Documentation.
-
-Logs.
-
-Screenshots.
-
-Commit messages.
-
-Pull requests.
-
-
-Use Replit's Secrets/environment-variable system for sensitive values.
-
-If a requested task requires a secret that has not been provided through an appropriate secure mechanism:
-
-Stop and ask the human maintainer.
-
-Never request that a secret be pasted into source code.
-
+Do not disable linting or formatting rules merely to avoid fixing code quality issues.
 
 ---
 
@@ -353,7 +576,7 @@ Configuration
 
 Environment-specific values must be handled through environment variables.
 
-The current required variable is:
+The current Discord secret is:
 
 DISCORD_TOKEN
 
@@ -363,177 +586,46 @@ The repository may contain:
 
 but it must never contain real secret values.
 
-Do not modify .env files unless explicitly required for local configuration, and never commit them.
+Do not commit ".env".
 
-
----
-
-Discord Rules
-
-When working with Discord functionality:
-
-Use the existing discord.js setup unless the active milestone requires a change.
-
-Request only the Gateway intents actually required by the feature.
-
-Do not enable privileged intents unnecessarily.
-
-Do not expose Discord tokens.
-
-Handle Discord errors explicitly.
-
-Avoid blocking the Discord event loop.
-
-Use asynchronous operations appropriately.
-
-Preserve graceful shutdown behavior.
-
-
-Do not introduce slash commands, command frameworks, or additional Discord functionality unless the active milestone requires them.
-
-
----
-
-Architecture Rules
-
-Follow the architecture described in:
-
-docs/ARCHITECTURE.md
-
-The current implementation is intentionally simple.
-
-Do not create:
-
-Bot Controller layers.
-
-Assistant layers.
-
-AI providers.
-
-Zora adapters.
-
-Wallet adapters.
-
-Trading adapters.
-
-Database layers.
-
-
-unless the active roadmap milestone explicitly requires them.
-
-When introducing a new architectural component, define:
-
-Its responsibility.
-
-Its dependencies.
-
-Its public interface.
-
-Its error behavior.
-
-Its tests.
-
-
-Avoid circular dependencies.
-
-Prefer one-directional dependencies.
-
-
----
-
-Future EmiAgent
-
-EmiAgent is a planned future intelligence layer.
-
-Do not implement EmiAgent simply because it appears in the architecture documentation.
-
-When the relevant roadmap milestone eventually becomes active, the assistant layer should be introduced deliberately.
-
-The future agent should not automatically receive:
-
-Wallet signing authority.
-
-Private keys.
-
-Unrestricted transaction capability.
-
-Unrestricted external account access.
-
-
-Tool permissions and security boundaries must be designed before connecting sensitive external capabilities.
-
+M4 should not add AI-provider credentials because M4 does not use a real AI provider.
 
 ---
 
 External Integrations
 
-The following are future functionality:
+The following remain future functionality:
 
-Zora.
+- Zora.
+- Blockchain services.
+- Wallet services.
+- Trading services.
+- AI/LLM providers.
+- Image-generation services.
+- Additional communication platforms.
 
-Blockchain services.
-
-Wallet services.
-
-Trading services.
-
-AI/LLM providers.
-
-Image-generation services.
-
-Additional communication platforms.
-
-
-Do not implement these unless explicitly authorized by the active milestone or the human maintainer.
+Do not implement these unless explicitly authorized by the active milestone or human maintainer.
 
 Do not add SDKs, API clients, credentials, or network integrations merely because they may be useful later.
-
 
 ---
 
 Database and Persistent Storage
 
-The current project does not require a persistent database.
+M4 does not require persistent storage.
 
 Do not introduce:
 
-PostgreSQL.
+- PostgreSQL.
+- Redis.
+- MongoDB.
+- SQLite.
+- Cloud databases.
+- Persistent queues.
 
-Redis.
+unless the active roadmap milestone explicitly requires persistent state.
 
-MongoDB.
-
-SQLite.
-
-Cloud databases.
-
-Persistent queues.
-
-
-unless a roadmap milestone explicitly requires persistent state.
-
-Avoid introducing infrastructure before it is necessary.
-
-
----
-
-Testing Requirements
-
-New behavior should have appropriate tests where practical.
-
-Prefer:
-
-Unit tests for pure logic.
-
-Integration tests for module interactions.
-
-Manual validation for Discord behavior that depends on the live Discord Gateway.
-
-
-Do not delete or weaken existing tests simply to make a change pass.
-
-Do not disable linting or formatting rules merely to avoid fixing code quality issues.
-
+Avoid infrastructure before it is necessary.
 
 ---
 
@@ -543,31 +635,21 @@ Documentation should describe the actual project state.
 
 Update documentation when a change materially affects:
 
-Project scope.
-
-Architecture.
-
-Milestones.
-
-Security requirements.
-
-Configuration.
-
-Testing.
-
-Repository structure.
-
-Development workflow.
-
-Replit Agent behavior.
-
+- Project scope.
+- Architecture.
+- Milestones.
+- Security requirements.
+- Configuration.
+- Testing.
+- Repository structure.
+- Development workflow.
+- Replit Agent behavior.
 
 Do not rewrite documentation for every tiny implementation change.
 
 If documentation needs to change, keep the update focused on the affected section.
 
 Never silently claim that a feature is implemented when it is only planned.
-
 
 ---
 
@@ -591,26 +673,21 @@ git remote -v
 
 Keep commits focused and descriptive.
 
-Prefer commit messages such as:
+Preferred examples:
 
-feat: add slash command framework
-fix: handle Discord reply errors
-test: add command handler tests
-docs: update milestone documentation
+feat: add assistant interface
+feat: add deterministic assistant
+test: add assistant boundary tests
+refactor: route messages through assistant
+docs: update M4 architecture
 
 Do not commit:
 
 .env
-
-Secrets.
-
-Generated credentials.
-
-Temporary debugging files.
-
-Unrelated local files.
-
-
+secrets
+credentials
+temporary debugging files
+unrelated local files
 
 ---
 
@@ -618,32 +695,35 @@ Replit Changes vs GitHub Changes
 
 Replit is a development environment.
 
-Do not assume that a change made inside Replit should automatically be merged into GitHub's main branch.
+Do not assume that a change made inside Replit should automatically be merged into GitHub.
 
-The normal workflow is:
+For M4, the expected workflow is:
 
-GitHub repository
-       ↓
+GitHub M4
+   ↓
 Replit
-       ↓
-Development work
-       ↓
+   ↓
+Agent implementation
+   ↓
 Tests
-       ↓
+   ↓
 Review
-       ↓
+   ↓
 Commit
-       ↓
-Push to appropriate branch
-       ↓
+   ↓
+Push M4
+   ↓
+Termux validation
+   ↓
 Human review
-       ↓
-Merge when approved
+   ↓
+Pull request
+   ↓
+dev
 
-The human maintainer decides when a branch should be merged into main.
+The human maintainer decides when the milestone branch should be merged.
 
-Do not merge or change protected branch settings without explicit instruction.
-
+Do not merge branches or change protected/default branch settings without explicit instruction.
 
 ---
 
@@ -656,51 +736,41 @@ Ask before implementing.
 When blocked:
 
 1. Explain what is blocking progress.
-
-
 2. Explain why it matters.
-
-
 3. Suggest the safest next step.
-
-
 4. Wait for human approval when required.
-
-
 
 Do not make large speculative changes to unblock yourself.
 
+When making an important architectural decision, explain the decision briefly before implementation.
 
 ---
 
-Completion Checklist
+M4 Completion Checklist
 
-Before declaring a task complete, verify:
+Before declaring M4 complete, verify:
 
-[ ] The requested functionality is implemented.
+- [ ] The assistant interface is defined.
+- [ ] The assistant accepts normalized application requests.
+- [ ] The assistant returns structured responses.
+- [ ] A deterministic/mock assistant is implemented.
+- [ ] Appropriate assistant tests exist.
+- [ ] Handler/application integration is tested where required.
+- [ ] No real LLM provider was introduced.
+- [ ] No wallet functionality was introduced.
+- [ ] No blockchain transactions were introduced.
+- [ ] No Zora integration was introduced.
+- [ ] No unrestricted external tools were introduced.
+- [ ] No secrets were added.
+- [ ] Existing functionality still works.
+- [ ] "npm run check" passes.
+- [ ] Required manual validation was performed.
+- [ ] Documentation accurately reflects the implementation.
+- [ ] "git diff" was reviewed.
+- [ ] No unrelated files were changed.
+- [ ] The human maintainer has reviewed the implementation.
 
-[ ] The change belongs to the active milestone.
-
-[ ] No future milestone was implemented accidentally.
-
-[ ] No secrets were added.
-
-[ ] Existing functionality still works.
-
-[ ] Appropriate tests were added or updated.
-
-[ ] npm run check passes.
-
-[ ] Manual validation was performed when necessary.
-
-[ ] Documentation was updated if materially affected.
-
-[ ] git diff was reviewed.
-
-[ ] No unrelated files were changed.
-
-A task is complete only when the implementation and validation requirements are satisfied.
-
+Passing the checklist does not authorize merging by itself. Final milestone completion remains a human-maintainer decision.
 
 ---
 
@@ -710,11 +780,26 @@ EmiBot should grow deliberately.
 
 Prefer:
 
-small → tested → reviewed → approved → integrated
+small
+  ↓
+tested
+  ↓
+reviewed
+  ↓
+approved
+  ↓
+integrated
 
 over:
 
-large → speculative → tightly coupled → difficult to review
+large
+  ↓
+speculative
+  ↓
+tightly coupled
+  ↓
+difficult to review
 
-The long-term goal is a capable EmiAgent, but the immediate responsibility is to build a reliable foundation one milestone at a time.
-```
+The long-term goal is a capable EmiAgent.
+
+The immediate responsibility of the Replit Agent is to build only the approved M4 foundation, safely and incrementally.
