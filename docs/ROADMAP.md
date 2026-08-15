@@ -168,7 +168,7 @@ Avoid creating abstractions solely for hypothetical future functionality.
 
 Milestone 4 — EmiAgent Foundation
 
-Status: FUTURE
+Status: ACTIVE
 
 Objective
 
