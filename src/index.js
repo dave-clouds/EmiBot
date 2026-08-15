@@ -2,6 +2,8 @@ import { Client, GatewayIntentBits, Partials } from 'discord.js';
 
 import { pingCommand } from './commands/ping.js';
 import { config } from './config/env.js';
+import { handleCommand } from './handlers/command-handler.js';
+import { handleMessage } from './handlers/message-handler.js';
 import { logger } from './lib/logger.js';
 
 const commands = new Map([[pingCommand.data.name, pingCommand]]);
@@ -21,52 +23,11 @@ client.once('clientReady', (readyClient) => {
 });
 
 client.on('messageCreate', async (message) => {
-  if (message.author.bot) {
-    return;
-  }
-
-  const isDirectMessage = message.channel.isDMBased();
-
-  if (!isDirectMessage && !message.mentions.has(client.user)) {
-    return;
-  }
-
-  try {
-    await message.reply('👋 Hey! I’m EmiBot. I’m online and working!');
-  } catch (error) {
-    logger.error(error, 'Failed to reply to Discord message');
-  }
+  await handleMessage(message, client);
 });
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isChatInputCommand()) {
-    return;
-  }
-
-  const command = commands.get(interaction.commandName);
-
-  if (!command) {
-    logger.warn(`Unknown slash command: ${interaction.commandName}`);
-    return;
-  }
-
-  try {
-    await command.execute(interaction);
-  } catch (error) {
-    logger.error(error, `Failed to execute /${interaction.commandName}`);
-
-    if (interaction.replied || interaction.deferred) {
-      await interaction.followUp({
-        content: 'Sorry, something went wrong while executing that command.',
-        ephemeral: true,
-      });
-    } else {
-      await interaction.reply({
-        content: 'Sorry, something went wrong while executing that command.',
-        ephemeral: true,
-      });
-    }
-  }
+  await handleCommand(interaction, commands);
 });
 
 client.on('error', (error) => {
